@@ -18,12 +18,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     document.querySelector(this.getAttribute('href')).scrollIntoView({
       behavior: 'smooth'
     });
-
-    // Close navbar on mobile after clicking a link
-    if (navbar.classList.contains("active")) {
-      navbar.classList.remove("active");
-      menuIcon.classList.remove("open");
-    }
   });
 });
 
@@ -34,34 +28,28 @@ window.addEventListener("scroll", () => {
 });
   
 
-// // Smooth Scroll for Anchor Links
-// navLinks.forEach(link => {
-//   link.addEventListener("click", event => {
-//     event.preventDefault(); // Prevent default anchor behavior
-//     const targetId = link.getAttribute("href").slice(1); // Get the ID (skip the '#')
-//     const targetSection = document.getElementById(targetId);
+// Smooth Scroll for Anchor Links
+navLinks.forEach(link => {
+  link.addEventListener("click", event => {
+    event.preventDefault(); // Prevent default anchor behavior
+    const targetId = link.getAttribute("href").slice(1); // Get the ID (skip the '#')
+    const targetSection = document.getElementById(targetId);
 
-//     if (targetSection) {
-//       // Smooth scroll to the target section
-//       window.scrollTo({
-//         top: targetSection.offsetTop - 80, // Offset for fixed header
-//         behavior: "smooth"
-//       });
-//     }
-
-// // Close navbar on mobile view after clicking a link
-//     if (navbar.classList.contains("active")) {
-//       navbar.classList.remove("active");
-//       menuIcon.classList.remove("open");
-//     }
-//   });
-// });
+    if (targetSection) {
+      // Smooth scroll to the target section
+      window.scrollTo({
+        top: targetSection.offsetTop - 80, // Offset for fixed header
+        behavior: "smooth"
+      });
+    }
+  });
+});
 
 // Sticky Header on Scroll
-// window.addEventListener("scroll", () => {
-//   const header = document.querySelector(".header");
-//   header.classList.toggle("scrolled", window.scrollY > 50);
-// });
+window.addEventListener("scroll", () => {
+  const header = document.querySelector(".header");
+  header.classList.toggle("scrolled", window.scrollY > 50);
+});
 
 // Dynamic Year Update in Footer
 const yearElement = document.querySelector(".year");
@@ -69,10 +57,6 @@ if (yearElement) {
   const currentYear = new Date().getFullYear();
   yearElement.textContent = currentYear;
 }
-
-
-
-
 
 menuIcon.addEventListener("click", () => {
   navbar.classList.toggle("active");
@@ -87,13 +71,6 @@ menuIcon.onclick = () =>{
 if (yearElement) {
   yearElement.textContent = new Date().getFullYear();
 }
-
-
-// Toggle Navbar for Mobile View
-menuIcon.addEventListener("click", () => {
-    navbar.classList.toggle("active");
-    menuIcon.classList.toggle("open");
-  });
   
   // Close Navbar on Link Click
   navLinks.forEach(link => {
