@@ -108,10 +108,14 @@ button.addEventListener('click', () => {
 
 const form = document.querySelector("form");
 
+
 form.addEventListener("submit", async (event) => {
   event.preventDefault(); // Prevent form from refreshing the page
 
   const formData = new FormData(form);
+
+  // Log the form data for debugging
+  console.log([...formData]);  // Log all form fields and values
 
   try {
     const response = await fetch(form.action, {
@@ -122,6 +126,10 @@ form.addEventListener("submit", async (event) => {
       },
     });
 
+    console.log(response.status);
+    const responseBody = await response.text();  // Get response body as text
+    console.log(responseBody);  // Log the response status
+
     if (response.ok) {
       alert("Thank you! Your message has been sent.");
       form.reset(); // Clear the form
@@ -129,6 +137,34 @@ form.addEventListener("submit", async (event) => {
       alert("Oops! There was a problem submitting your form.");
     }
   } catch (error) {
+    console.error('Error:', error);  // Log the error for debugging
     alert("Something went wrong. Please try again later.");
   }
 });
+
+
+// Open the modal and display the clicked image
+function openModal(imageSrc) {
+  var modal = document.getElementById("imageModal");
+  var modalImage = document.getElementById("modalImage");
+  var caption = document.getElementById("modalCaption");
+  
+  modal.style.display = "block";
+  modalImage.src = imageSrc;
+  caption.innerHTML = "Certification Image"; // You can modify this caption as needed
+}
+
+// Close the modal
+function closeModal() {
+  var modal = document.getElementById("imageModal");
+  modal.style.display = "none";
+}
+
+// Close the modal when clicking outside the image
+window.onclick = function(event) {
+  var modal = document.getElementById("imageModal");
+  if (event.target == modal) {
+    closeModal();
+  }
+}
+
